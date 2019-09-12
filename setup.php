@@ -26,7 +26,6 @@ class Core
                 $data.=$value;
             }
         }
-        $this->writeLogs(sizeof($DataOnArray)." VPNs was Created");
         $file = fopen("/etc/ocserv/ocpasswd", "a");
         fputs($file,$data);
         fclose($file);
@@ -44,7 +43,6 @@ class Core
 				unset($data[$index]);
             }
         }
-        $this->writeLogs(sizeof($DataOnArray)." VPNS was Deleted");
         file_put_contents("/etc/ocserv/ocpasswd", implode('', $data));
         return 1;
     }
