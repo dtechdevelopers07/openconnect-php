@@ -41,6 +41,7 @@ class Core
             if($response['state']==1){
 				$index = array_search($response['line'], $data);
 				unset($data[$index]);
+		    exec("occtl disconnect user ".$key['username']);
             }
         }
         file_put_contents("/etc/ocserv/ocpasswd", implode('', $data));
@@ -88,6 +89,7 @@ class Core
 				$data = file("/etc/ocserv/ocpasswd"); // reads an array of lines 
 				$array = explode("*:",$response['line']);
 				$data = array_map(array($this,'replace_a_line'),$data);
+				exec("occtl disconnect user ".$user);
 				file_put_contents("/etc/ocserv/ocpasswd", implode('', $data));
 				$result=1;
 		    }catch(Exception $e){
